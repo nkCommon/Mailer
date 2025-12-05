@@ -1,0 +1,2 @@
+# Mailer
+Handles mailing etc
