@@ -1,8 +1,6 @@
 import logging
 import requests
 import msal
-import os
-from dotenv import load_dotenv
 import datetime as dt
 from typing import Optional
 # import asyncio
@@ -11,14 +9,11 @@ class ExchangeHandler:
     """_summary_
     ExchangeHandler is a class that handles the exchange of mail with the Exchange server
     """
-    def __init__(self, env_file: str = '.env'):
-        load_dotenv(env_file)
-        
-        # === CONFIG ===
-        self.TENANT_ID = os.getenv("MAIL_TENANT_ID")
-        self.CLIENT_ID = os.getenv("MAIL_CLIENT_ID")
-        self.CLIENT_SECRET = os.getenv("MAIL_CLIENT_SECRET")
-        self.USER_ID = os.getenv("MAIL_USER_ID", "rpa@naestved.dk")  
+    def __init__(self, tenant_id: str, client_id: str, client_secret: str, user_id: str):
+        self.TENANT_ID = tenant_id
+        self.CLIENT_ID = client_id
+        self.CLIENT_SECRET = client_secret
+        self.USER_ID = user_id
 
         self.AUTHORITY = f"https://login.microsoftonline.com/{self.TENANT_ID}"
         self.SCOPE = ["https://graph.microsoft.com/.default"]
